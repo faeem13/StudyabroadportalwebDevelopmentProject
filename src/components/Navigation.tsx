@@ -1,13 +1,18 @@
-import { GraduationCap, Menu, X } from 'lucide-react';
+import { GraduationCap, Menu, X, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'motion/react';
 
 interface NavigationProps {
   activeSection: string;
   setActiveSection: (section: string) => void;
+  user: { name: string; email: string } | null;
+  onLoginClick: () => void;
+  onLogout: () => void;
 }
 
-export function Navigation({ activeSection, setActiveSection }: NavigationProps) {
+export function Navigation({ activeSection, setActiveSection, user, onLoginClick, onLogout }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -43,6 +48,62 @@ export function Navigation({ activeSection, setActiveSection }: NavigationProps)
                 {item.label}
               </button>
             ))}
+            
+            {/* User Menu */}
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                  <span>{user.name}</span>
+                </button>
+                
+                {showUserMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
+                  >
+                    <div className="px-4 py-2 border-b border-gray-200">
+                      <p className="text-sm text-gray-900">{user.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                    </div>
+                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                      Profile
+                    </button>
+                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                      Saved Items
+                    </button>
+                    <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                      Settings
+                    </button>
+                    <div className="border-t border-gray-200 mt-2">
+                      <button
+                        onClick={() => {
+                          onLogout();
+                          setShowUserMenu(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Logout
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            ) : (
+              <motion.button
+                onClick={onLoginClick}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Login
+              </motion.button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -77,6 +138,38 @@ export function Navigation({ activeSection, setActiveSection }: NavigationProps)
                 {item.label}
               </button>
             ))}
+            
+            {/* Mobile Login/User */}
+            <div className="mt-4 px-4">
+              {user ? (
+                <div className="space-y-2">
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-900">{user.name}</p>
+                    <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      onLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    onLoginClick();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Login
+                </button>
+              )}
+            </div>
           </div>
         )}
       </div>

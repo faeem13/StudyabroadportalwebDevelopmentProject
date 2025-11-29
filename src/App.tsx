@@ -8,6 +8,7 @@ import { VisaGuide } from './components/VisaGuide';
 import { JobProspects } from './components/JobProspects';
 import { PreparationTips } from './components/PreparationTips';
 import { Footer } from './components/Footer';
+import { LoginModal } from './components/LoginModal';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -16,6 +17,16 @@ export default function App() {
     universities: [],
     scholarships: [],
   });
+  const [showLogin, setShowLogin] = useState(false);
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+
+  const handleLogin = (userData: { name: string; email: string }) => {
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
@@ -25,7 +36,19 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
+      <Navigation 
+        activeSection={activeSection} 
+        setActiveSection={setActiveSection}
+        user={user}
+        onLoginClick={() => setShowLogin(true)}
+        onLogout={handleLogout}
+      />
+      
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onLogin={handleLogin}
+      />
       
       <AnimatePresence mode="wait">
         <motion.div
