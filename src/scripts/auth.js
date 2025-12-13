@@ -86,43 +86,57 @@ function updateAuthUI() {
         // Desktop user menu
         userMenuArea.innerHTML = `
             <div class="relative">
-                <button id="userMenuBtn" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors hover-scale">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                <button id="userMenuBtn" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all hover-lift">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <span class="font-medium">${currentUser.name}</span>
+                    <svg class="w-4 h-4 chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-                    <span>${currentUser.name}</span>
                 </button>
                 
-                <div id="userMenuDropdown" class="user-menu-dropdown">
-                    <div class="user-menu-header">
-                        <p class="text-sm text-gray-900">${currentUser.name}</p>
-                        <p class="text-xs text-gray-500 truncate">${currentUser.email}</p>
+                <div id="userMenuDropdown" class="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50 hidden opacity-0 scale-95 transition-all duration-200">
+                    <div class="px-4 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border-b border-gray-100">
+                        <p class="text-sm font-semibold text-gray-900">${currentUser.name}</p>
+                        <p class="text-xs text-gray-600 truncate mt-0.5">${currentUser.email}</p>
                     </div>
-                    <button class="user-menu-button">Profile</button>
-                    <button class="user-menu-button">Saved Items</button>
-                    <button class="user-menu-button">Settings</button>
-                    <div class="user-menu-divider"></div>
-                    <button id="logoutBtn" class="user-menu-button text-red-600 flex items-center gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                        Logout
-                    </button>
+                    <div class="py-2">
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all font-medium">
+                            👤 Profile
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all font-medium">
+                            💾 Saved Items
+                        </button>
+                        <button class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all font-medium">
+                            ⚙️ Settings
+                        </button>
+                    </div>
+                    <div class="border-t border-gray-100">
+                        <button id="logoutBtn" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-all flex items-center gap-2 font-medium">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
         
         // Mobile user menu
         mobileUserArea.innerHTML = `
-            <div class="space-y-2">
-                <div class="p-3 bg-gray-50 rounded-lg">
-                    <p class="text-sm text-gray-900">${currentUser.name}</p>
-                    <p class="text-xs text-gray-500 truncate">${currentUser.email}</p>
+            <div class="space-y-3">
+                <div class="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100">
+                    <p class="text-sm font-semibold text-gray-900">${currentUser.name}</p>
+                    <p class="text-xs text-gray-600 truncate mt-1">${currentUser.email}</p>
                 </div>
-                <button id="mobileLogoutBtn" class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                <button id="mobileLogoutBtn" class="w-full px-4 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 font-medium">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                         <polyline points="16 17 21 12 16 7"></polyline>
@@ -169,13 +183,13 @@ function updateAuthUI() {
     } else {
         // Login button
         userMenuArea.innerHTML = `
-            <button id="loginBtn" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors hover-scale">
+            <button id="loginBtn" class="px-6 py-2.5 bg-white text-blue-600 rounded-lg font-medium shadow-md hover:shadow-lg transition-all border-2 border-blue-600 hover:bg-blue-50 hover-scale">
                 Login
             </button>
         `;
         
         mobileUserArea.innerHTML = `
-            <button id="mobileLoginBtn" class="w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <button id="mobileLoginBtn" class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all font-medium">
                 Login
             </button>
         `;

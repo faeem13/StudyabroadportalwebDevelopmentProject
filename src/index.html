@@ -10,33 +10,40 @@
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Navigation -->
-    <nav id="navigation" class="bg-white shadow-md sticky top-0 z-50">
+    <nav id="navigation" class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div id="logoArea" class="flex items-center gap-2 cursor-pointer">
-                    <svg class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                    </svg>
-                    <span class="text-xl text-gray-900">Study Abroad Portal</span>
+                <div id="logoArea" class="flex items-center gap-2 cursor-pointer hover-scale">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Study Abroad Portal
+                    </span>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div id="desktopNav" class="hidden md:flex items-center gap-6">
-                    <button data-section="home" class="nav-link px-3 py-2 rounded-md transition-colors text-blue-600 bg-blue-50">Home</button>
-                    <button data-section="preparation" class="nav-link px-3 py-2 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Preparation Tips</button>
-                    <button data-section="tests" class="nav-link px-3 py-2 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Test Prep</button>
-                    <button data-section="universities" class="nav-link px-3 py-2 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Universities</button>
-                    <button data-section="scholarships" class="nav-link px-3 py-2 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Scholarships</button>
-                    <button data-section="visa" class="nav-link px-3 py-2 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Visa Guide</button>
-                    <button data-section="jobs" class="nav-link px-3 py-2 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Job Prospects</button>
+                <div id="desktopNav" class="hidden md:flex items-center gap-2">
+                    <button data-section="home" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-blue-600 bg-blue-50 hover-lift">
+                        Home
+                        <div class="active-indicator absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
+                    </button>
+                    <button data-section="preparation" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Preparation Tips</button>
+                    <button data-section="tests" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Test Prep</button>
+                    <button data-section="universities" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Universities</button>
+                    <button data-section="scholarships" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Scholarships</button>
+                    <button data-section="visa" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Visa Guide</button>
+                    <button data-section="jobs" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Job Prospects</button>
                     
                     <!-- User Menu Area -->
-                    <div id="userMenuArea"></div>
+                    <div id="userMenuArea" class="ml-2"></div>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="md:hidden p-2">
+                <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-lg hover:bg-gray-100 transition-colors">
                     <svg id="menuIcon" class="w-6 h-6 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -51,13 +58,13 @@
 
             <!-- Mobile Navigation -->
             <div id="mobileNav" class="md:hidden hidden py-4 border-t border-gray-200">
-                <button data-section="home" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-blue-600 bg-blue-50">Home</button>
-                <button data-section="preparation" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Preparation Tips</button>
-                <button data-section="tests" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Test Prep</button>
-                <button data-section="universities" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Universities</button>
-                <button data-section="scholarships" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Scholarships</button>
-                <button data-section="visa" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Visa Guide</button>
-                <button data-section="jobs" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-md transition-colors text-gray-700 hover:text-blue-600 hover:bg-gray-50">Job Prospects</button>
+                <button data-section="home" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-md">Home</button>
+                <button data-section="preparation" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Preparation Tips</button>
+                <button data-section="tests" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Test Prep</button>
+                <button data-section="universities" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Universities</button>
+                <button data-section="scholarships" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Scholarships</button>
+                <button data-section="visa" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Visa Guide</button>
+                <button data-section="jobs" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Job Prospects</button>
                 
                 <!-- Mobile Login Area -->
                 <div id="mobileUserArea" class="mt-4 px-4"></div>

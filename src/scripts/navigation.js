@@ -97,12 +97,26 @@ function updateActiveLinks(section) {
     // Desktop links
     const navLinks = $$('.nav-link');
     navLinks.forEach(link => {
+        const indicator = link.querySelector('.active-indicator');
+        
         if (link.dataset.section === section) {
             link.classList.add('text-blue-600', 'bg-blue-50');
             link.classList.remove('text-gray-700');
+            
+            // Show active indicator
+            if (!indicator) {
+                const newIndicator = document.createElement('div');
+                newIndicator.className = 'active-indicator absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full';
+                link.appendChild(newIndicator);
+            }
         } else {
             link.classList.remove('text-blue-600', 'bg-blue-50');
             link.classList.add('text-gray-700');
+            
+            // Remove active indicator
+            if (indicator) {
+                indicator.remove();
+            }
         }
     });
     
@@ -110,10 +124,10 @@ function updateActiveLinks(section) {
     const mobileLinks = $$('.mobile-nav-link');
     mobileLinks.forEach(link => {
         if (link.dataset.section === section) {
-            link.classList.add('text-blue-600', 'bg-blue-50');
+            link.classList.add('text-white', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'shadow-md');
             link.classList.remove('text-gray-700');
         } else {
-            link.classList.remove('text-blue-600', 'bg-blue-50');
+            link.classList.remove('text-white', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'shadow-md');
             link.classList.add('text-gray-700');
         }
     });

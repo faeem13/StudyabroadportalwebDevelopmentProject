@@ -89,7 +89,7 @@ export function Hero({ setActiveSection }: HeroProps) {
               whileTap={{ scale: 0.95 }}
             >
               Get Started
-              <ArrowRight className="w-5 h-5" />
+              <span className="text-xl">→</span>
             </motion.button>
           </div>
         </div>
@@ -109,7 +109,7 @@ export function Hero({ setActiveSection }: HeroProps) {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="flex flex-col gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
