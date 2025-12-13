@@ -1,0 +1,296 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo-wrapper">
+                <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="logo-text"><span>Study Abroad</span><span>Portal</span></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#" class="active">Preparation Tips</a></li>
+                <li><a href="#">Test Prep</a></li>
+                <li><a href="#">Universities</a></li>
+                <li><a href="#">Scholarships</a></li>
+                <li><a href="#">Visa Guide</a></li>
+                <li><a href="#">Job Prospects</a></li>
+            </ul>
+            <button class="btn-login">Login</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Skill & Research Preparation</h1>
+            <p>Prepare yourself for success with our comprehensive guide to developing essential skills and research capabilities</p>
+        </div>
+    </header>
+
+    <section class="section quiz-section">
+        <div class="container quiz-container">
+            
+            <input type="radio" name="q1" id="goal-1" class="state-input">
+            <input type="radio" name="q1" id="goal-2" class="state-input">
+            <input type="radio" name="q1" id="goal-3" class="state-input">
+            <input type="radio" name="q1" id="goal-4" class="state-input">
+
+            <input type="radio" name="q2" id="country-usa" class="state-input">
+            <input type="radio" name="q2" id="country-uk" class="state-input">
+            <input type="radio" name="q2" id="country-canada" class="state-input">
+            <input type="radio" name="q2" id="country-aus" class="state-input">
+
+            <input type="radio" name="q3" id="field-eng" class="state-input">
+            <input type="radio" name="q3" id="field-bus" class="state-input">
+            <input type="radio" name="q3" id="field-sci" class="state-input">
+            <input type="radio" name="q3" id="field-art" class="state-input">
+
+            <input type="radio" name="q4" id="budget-1" class="state-input">
+            <input type="radio" name="q4" id="budget-2" class="state-input">
+            <input type="radio" name="q4" id="budget-3" class="state-input">
+            <input type="radio" name="q4" id="budget-4" class="state-input">
+
+            <input type="reset" id="reset-quiz" class="state-input-reset">
+
+            <div class="section-header">
+                <h2>Find Your Perfect Study Path</h2>
+                <p>Take our interactive quiz to get personalized recommendations</p>
+            </div>
+
+            <div class="card quiz-card">
+                
+                <div class="quiz-meta">
+                    <span class="q-count-text">Question 1 of 4</span>
+                    <span class="q-progress-text">0% Complete</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <div class="quiz-step step-1">
+                    <h3 class="quiz-question">What is your primary goal for studying abroad?</h3>
+                    <div class="quiz-options">
+                        <label for="goal-1" class="option-label">Career advancement</label>
+                        <label for="goal-2" class="option-label">Academic excellence</label>
+                        <label for="goal-3" class="option-label">Cultural experience</label>
+                        <label for="goal-4" class="option-label">Research opportunities</label>
+                    </div>
+                </div>
+
+                <div class="quiz-step step-2">
+                    <h3 class="quiz-question">What is your preferred study destination?</h3>
+                    <div class="quiz-options">
+                        <label for="country-usa" class="option-label">USA</label>
+                        <label for="country-uk" class="option-label">UK</label>
+                        <label for="country-canada" class="option-label">Canada</label>
+                        <label for="country-aus" class="option-label">Australia</label>
+                    </div>
+                </div>
+
+                <div class="quiz-step step-3">
+                    <h3 class="quiz-question">What is your field of interest?</h3>
+                    <div class="quiz-options">
+                        <label for="field-eng" class="option-label">Engineering/Technology</label>
+                        <label for="field-bus" class="option-label">Business/Management</label>
+                        <label for="field-sci" class="option-label">Sciences</label>
+                        <label for="field-art" class="option-label">Arts/Humanities</label>
+                    </div>
+                </div>
+
+                <div class="quiz-step step-4">
+                    <h3 class="quiz-question">What is your budget range for annual tuition?</h3>
+                    <div class="quiz-options">
+                        <label for="budget-1" class="option-label">Under $20,000</label>
+                        <label for="budget-2" class="option-label">$20,000 - $40,000</label>
+                        <label for="budget-3" class="option-label">$40,000 - $60,000</label>
+                        <label for="budget-4" class="option-label">Above $60,000</label>
+                    </div>
+                </div>
+
+                <div class="quiz-step step-result">
+                    <div class="result-icon">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <h3 class="result-title">Your Personalized Recommendation</h3>
+                    
+                    <p class="result-desc">
+                        Based on your preferences, we recommend exploring 
+                        <b class="dynamic-country"></b> universities with strong 
+                        <b class="dynamic-field"></b> programs.
+                    </p>
+
+                    <h4 class="next-steps-title">Recommended Next Steps:</h4>
+                    <div class="next-steps-list">
+                        <div class="step-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Browse our university matcher</span>
+                        </div>
+                        <div class="step-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Check scholarship opportunities</span>
+                        </div>
+                        <div class="step-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Review visa requirements</span>
+                        </div>
+                    </div>
+
+                    <a href="index.html" class="btn-restart">Take Quiz Again</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section calculator-section">
+        <div class="container">
+            <div class="card calculator-card">
+                <div class="calc-header">
+                    <div class="icon-box green-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <h3>Cost Calculator</h3>
+                </div>
+                <div class="calc-body">
+                    <div class="form-group">
+                        <label>Select Country</label>
+                        <select><option>USA</option><option>UK</option><option>Canada</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Annual Tuition: $50,000</label>
+                        <input type="range" class="slider">
+                        <div class="slider-labels"><span>10K</span><span>100K</span></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Program Duration: 2 years</label>
+                        <input type="range" class="slider">
+                        <div class="slider-labels"><span>1 year</span><span>5 years</span></div>
+                    </div>
+                </div>
+                <div class="calc-footer">
+                    <p>Total Estimated Cost</p>
+                    <div class="total-price">$145,400</div>
+                    <button class="btn-block">Show Cost Breakdown</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section checklist-section">
+        <div class="container">
+            <div class="card checklist-card">
+                <div class="checklist-header">
+                    <div class="icon-square blue-bg"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>Research Preparation</h3>
+                </div>
+                <ul class="checklist-items">
+                    <li><i class="fa-regular fa-circle-check"></i> Read extensively in your field of interest</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Learn to use academic databases</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Understand citation formats</li>
+                </ul>
+            </div>
+             <div class="card checklist-card">
+                <div class="checklist-header">
+                    <div class="icon-square blue-bg"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <h3>Language Proficiency</h3>
+                </div>
+                <ul class="checklist-items">
+                    <li><i class="fa-regular fa-circle-check"></i> Practice English daily</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Join conversation groups</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Watch academic lectures</li>
+                </ul>
+            </div>
+             <div class="card checklist-card">
+                <div class="checklist-header">
+                    <div class="icon-square blue-bg"><i class="fa-regular fa-lightbulb"></i></div>
+                    <h3>Professional Development</h3>
+                </div>
+                <ul class="checklist-items">
+                    <li><i class="fa-regular fa-circle-check"></i> Build a strong LinkedIn profile</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Gain relevant internship experience</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Network with professionals</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section timeline-section">
+        <div class="container">
+            <div class="section-header"><h2>Preparation Timeline</h2></div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="circle">1</div>
+                    <div class="content"><h3>12-18 Months Before</h3><ul><li>Research universities</li><li>Start test prep</li></ul></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="circle">2</div>
+                    <div class="content"><h3>9-12 Months Before</h3><ul><li>Take tests</li><li>Get recommendations</li></ul></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="circle">3</div>
+                    <div class="content"><h3>6-9 Months Before</h3><ul><li>Complete applications</li><li>Apply for scholarships</li></ul></div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="circle">4</div>
+                    <div class="content"><h3>3-6 Months Before</h3><ul><li>Accept admission</li><li>Apply for visa</li></ul></div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="circle">5</div>
+                    <div class="content"><h3>1-3 Months Before</h3><ul><li>Book flights</li><li>Pack and prepare</li></ul></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col brand">
+                <div class="logo-wrapper white-mode">
+                    <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="logo-text"><span>Study Abroad Portal</span></div>
+                </div>
+                <p>Your comprehensive guide to studying abroad.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul><li><a href="#">About Us</a></li><li><a href="#">Blog</a></li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul><li><a href="#">Test Preparation</a></li><li><a href="#">Visa Guidance</a></li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul><li>info@studyabroad.com</li><li>+1 (555) 123-4567</li></ul>
+            </div>
+        </div>
+        <div class="copyright"><p>&copy; 2025 Study Abroad Portal.</p></div>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
