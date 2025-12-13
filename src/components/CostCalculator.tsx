@@ -39,14 +39,14 @@ export function CostCalculator() {
 
   return (
     <div className="bg-white rounded-xl shadow-md p-8">
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3 mb-8">
         <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
           <Calculator className="w-6 h-6 text-green-600" />
         </div>
         <h2 className="text-2xl text-gray-900">Cost Calculator</h2>
       </div>
 
-      <div className="space-y-6 mb-8">
+      <div className="space-y-8 mb-10">
         <div>
           <label className="block text-sm text-gray-700 mb-2">Select Country</label>
           <select
@@ -105,7 +105,7 @@ export function CostCalculator() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         key={costs.total}
-        className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6"
+        className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-8"
       >
         <div className="text-center mb-4">
           <div className="text-sm text-gray-600 mb-1">Total Estimated Cost</div>
@@ -134,7 +134,7 @@ export function CostCalculator() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="space-y-3 overflow-hidden"
+            className="space-y-4 overflow-hidden"
           >
             <CostBar
               label="Tuition Fees"

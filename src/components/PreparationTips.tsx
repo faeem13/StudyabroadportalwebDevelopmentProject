@@ -67,9 +67,10 @@ export function PreparationTips() {
 
         {/* Interactive Quiz */}
         <div className="mb-16">
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="text-center mb-8"
           >
             <h2 className="text-3xl text-gray-900 mb-4">Find Your Perfect Study Path</h2>
@@ -79,7 +80,7 @@ export function PreparationTips() {
         </div>
 
         {/* Cost Calculator */}
-        <div className="mb-16">
+        <div className="mb-16 mt-16">
           <CostCalculator />
         </div>
 

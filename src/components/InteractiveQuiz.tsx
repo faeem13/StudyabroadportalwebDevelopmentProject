@@ -134,7 +134,7 @@ export function InteractiveQuiz() {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-8">
+    <div className="bg-white rounded-xl shadow-md p-8 mt-8">
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <span className="text-sm text-gray-600">Question {currentQuestion + 1} of {questions.length}</span>
