@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Prospects - Study Abroad Portal</title>
+    <link rel="stylesheet" href="home-styles.css">
+    <link rel="stylesheet" href="job-prospects-styles.css">
+    <style>
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-header">
+                <div class="logo" onclick="window.location.href='home.html'">
+                    <div class="logo-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Study Abroad Portal</span>
+                </div>
+
+                <div class="nav-links">
+                    <a href="home.html" class="nav-link">Home</a>
+                    <a href="preparation-tips.html" class="nav-link">Preparation Tips</a>
+                    <a href="test-prep.html" class="nav-link">Test Prep</a>
+                    <a href="universities.html" class="nav-link">Universities</a>
+                    <a href="scholarships.html" class="nav-link">Scholarships</a>
+                    <a href="visa-guide.html" class="nav-link">Visa Guide</a>
+                    <a href="job-prospects.html" class="nav-link active">Job Prospects</a>
+                    <button class="btn-login" id="loginBtn">Login</button>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg class="icon menu-icon" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg class="icon close-icon" viewBox="0 0 24 24" style="display: none;">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-nav" id="mobileNav">
+                <a href="home.html" class="mobile-nav-link">Home</a>
+                <a href="preparation-tips.html" class="mobile-nav-link">Preparation Tips</a>
+                <a href="test-prep.html" class="mobile-nav-link">Test Prep</a>
+                <a href="universities.html" class="mobile-nav-link">Universities</a>
+                <a href="scholarships.html" class="mobile-nav-link">Scholarships</a>
+                <a href="visa-guide.html" class="mobile-nav-link">Visa Guide</a>
+                <a href="job-prospects.html" class="mobile-nav-link active">Job Prospects</a>
+                <button class="btn-login-mobile" id="loginBtnMobile">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="jobs-page">
+        <div class="jobs-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>Post-Study Job Prospects</h1>
+                <p class="page-description">
+                    Explore career opportunities and work authorization options in popular study destinations
+                </p>
+            </div>
+
+            <!-- Countries Grid -->
+            <div class="jobs-grid" id="jobsGrid">
+                <!-- Job prospect cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <svg class="icon" style="width: 32px; height: 32px; color: #60a5fa;" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <span>Study Abroad Portal</span>
+                    </div>
+                    <p class="footer-description">
+                        Your comprehensive guide to studying abroad and building a successful international career.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Test Preparation</a></li>
+                        <li><a href="#">University Search</a></li>
+                        <li><a href="#">Scholarship Assistance</a></li>
+                        <li><a href="#">Visa Guidance</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                            <span>info@studyabroad.com</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Global Education Center</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Study Abroad Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home-script.js"></script>
+    <script src="job-prospects-script.js"></script>
+</body>
+</html>

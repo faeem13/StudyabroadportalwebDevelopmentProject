@@ -2,15 +2,7 @@ import { GraduationCap, Menu, X, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
-interface NavigationProps {
-  activeSection: string;
-  setActiveSection: (section: string) => void;
-  user: { name: string; email: string } | null;
-  onLoginClick: () => void;
-  onLogout: () => void;
-}
-
-export function Navigation({ activeSection, setActiveSection, user, onLoginClick, onLogout }: NavigationProps) {
+export function Navigation({ activeSection, setActiveSection, user, onLoginClick, onLogout }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 

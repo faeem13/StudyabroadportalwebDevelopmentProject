@@ -2,12 +2,7 @@ import { useState } from 'react';
 import { Award, DollarSign, Calendar, Users, CheckCircle, Search, Heart, Bell } from 'lucide-react';
 import { motion } from 'motion/react';
 
-interface ScholarshipFinderProps {
-  savedItems: { universities: any[]; scholarships: any[] };
-  setSavedItems: (items: any) => void;
-}
-
-export function ScholarshipFinder({ savedItems, setSavedItems }: ScholarshipFinderProps) {
+export function ScholarshipFinder({ savedItems, setSavedItems }) {
   const [filters, setFilters] = useState({
     country: '',
     level: '',
@@ -94,7 +89,7 @@ export function ScholarshipFinder({ savedItems, setSavedItems }: ScholarshipFind
     return true;
   });
 
-  const toggleSave = (scholarship: any) => {
+  const toggleSave = (scholarship) => {
     const isSaved = savedItems.scholarships.some((s) => s.name === scholarship.name);
     if (isSaved) {
       setSavedItems({
@@ -109,9 +104,9 @@ export function ScholarshipFinder({ savedItems, setSavedItems }: ScholarshipFind
     }
   };
 
-  const [reminders, setReminders] = useState<string[]>([]);
+  const [reminders, setReminders] = useState([]);
 
-  const toggleReminder = (name: string) => {
+  const toggleReminder = (name) => {
     if (reminders.includes(name)) {
       setReminders(reminders.filter((r) => r !== name));
     } else {

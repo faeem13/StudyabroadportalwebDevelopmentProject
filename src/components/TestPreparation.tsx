@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function TestPreparation() {
-  const [expandedTest, setExpandedTest] = useState<number | null>(0);
+  const [expandedTest, setExpandedTest] = useState(0);
   const tests = [
     {
       name: 'IELTS',

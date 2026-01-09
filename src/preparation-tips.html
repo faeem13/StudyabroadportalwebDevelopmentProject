@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparation Tips - Study Abroad Portal</title>
+    <link rel="stylesheet" href="home-styles.css">
+    <link rel="stylesheet" href="preparation-tips-styles.css">
+    <style>
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-header">
+                <div class="logo" onclick="window.location.href='home.html'">
+                    <div class="logo-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Study Abroad Portal</span>
+                </div>
+
+                <div class="nav-links">
+                    <a href="home.html" class="nav-link">Home</a>
+                    <a href="preparation-tips.html" class="nav-link active">Preparation Tips</a>
+                    <a href="test-prep.html" class="nav-link">Test Prep</a>
+                    <a href="universities.html" class="nav-link">Universities</a>
+                    <a href="scholarships.html" class="nav-link">Scholarships</a>
+                    <a href="visa-guide.html" class="nav-link">Visa Guide</a>
+                    <a href="job-prospects.html" class="nav-link">Job Prospects</a>
+                    <button class="btn-login" id="loginBtn">Login</button>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg class="icon menu-icon" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg class="icon close-icon" viewBox="0 0 24 24" style="display: none;">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-nav" id="mobileNav">
+                <a href="home.html" class="mobile-nav-link">Home</a>
+                <a href="preparation-tips.html" class="mobile-nav-link active">Preparation Tips</a>
+                <a href="test-prep.html" class="mobile-nav-link">Test Prep</a>
+                <a href="universities.html" class="mobile-nav-link">Universities</a>
+                <a href="scholarships.html" class="mobile-nav-link">Scholarships</a>
+                <a href="visa-guide.html" class="mobile-nav-link">Visa Guide</a>
+                <a href="job-prospects.html" class="mobile-nav-link">Job Prospects</a>
+                <button class="btn-login-mobile" id="loginBtnMobile">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="prep-page">
+        <div class="prep-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>Skill & Research Preparation</h1>
+                <p class="page-description">
+                    Prepare yourself for success with our comprehensive guide to developing essential skills and research capabilities
+                </p>
+            </div>
+
+            <!-- Interactive Quiz Section -->
+            <div class="quiz-section">
+                <div class="section-intro">
+                    <h2>Find Your Perfect Study Path</h2>
+                    <p>Take our interactive quiz to get personalized recommendations</p>
+                </div>
+                
+                <div class="quiz-card" id="quizCard">
+                    <!-- Progress Bar -->
+                    <div class="quiz-progress">
+                        <div class="progress-info">
+                            <span>Question <span id="currentQ">1</span> of 4</span>
+                            <span><span id="progressPercent">0</span>% Complete</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question -->
+                    <div id="questionContainer"></div>
+
+                    <!-- Results -->
+                    <div id="resultsContainer" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Cost Calculator Section -->
+            <div class="calculator-section">
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <div class="calc-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                                <line x1="8" y1="6" x2="16" y2="6"></line>
+                                <line x1="8" y1="10" x2="16" y2="10"></line>
+                                <line x1="8" y1="14" x2="12" y2="14"></line>
+                                <line x1="8" y1="18" x2="16" y2="18"></line>
+                            </svg>
+                        </div>
+                        <h2>Cost Calculator</h2>
+                    </div>
+
+                    <div class="calculator-inputs">
+                        <div class="input-group">
+                            <label>Select Country</label>
+                            <select id="countrySelect" class="calc-select">
+                                <option value="USA">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Germany">Germany</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Annual Tuition: <span id="tuitionValue">$50,000</span></label>
+                            <input type="range" id="tuitionSlider" min="10000" max="100000" step="5000" value="50000" class="slider">
+                            <div class="slider-labels">
+                                <span>10K</span>
+                                <span>100K</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Program Duration: <span id="durationValue">2 years</span></label>
+                            <input type="range" id="durationSlider" min="1" max="5" step="1" value="2" class="slider">
+                            <div class="slider-labels">
+                                <span>1 year</span>
+                                <span>5 years</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cost-result">
+                        <div class="result-label">Total Estimated Cost</div>
+                        <div class="result-value" id="totalCost">$0</div>
+                    </div>
+
+                    <button class="btn-breakdown" id="toggleBreakdown">Show Cost Breakdown</button>
+
+                    <div id="costBreakdown" class="cost-breakdown" style="display: none;">
+                        <div class="breakdown-item">
+                            <div class="breakdown-header">
+                                <span>Tuition Fees</span>
+                                <span id="tuitionTotal">$0</span>
+                            </div>
+                            <div class="breakdown-bar">
+                                <div class="bar-fill bar-blue" id="tuitionBar"></div>
+                            </div>
+                            <div class="breakdown-percent" id="tuitionPercent">0%</div>
+                        </div>
+
+                        <div class="breakdown-item">
+                            <div class="breakdown-header">
+                                <span>Living Expenses</span>
+                                <span id="livingTotal">$0</span>
+                            </div>
+                            <div class="breakdown-bar">
+                                <div class="bar-fill bar-green" id="livingBar"></div>
+                            </div>
+                            <div class="breakdown-percent" id="livingPercent">0%</div>
+                        </div>
+
+                        <div class="breakdown-item">
+                            <div class="breakdown-header">
+                                <span>Other Costs</span>
+                                <span id="othersTotal">$0</span>
+                            </div>
+                            <div class="breakdown-bar">
+                                <div class="bar-fill bar-purple" id="othersBar"></div>
+                            </div>
+                            <div class="breakdown-percent" id="othersPercent">0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="skills-grid">
+                <!-- Academic Skills -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h2>Academic Skills</h2>
+                    </div>
+                    <ul class="skill-list">
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Develop strong writing skills for essays and research papers</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Improve critical thinking and analytical abilities</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Practice time management and organizational skills</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Enhance presentation and public speaking abilities</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Research Preparation -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                        </div>
+                        <h2>Research Preparation</h2>
+                    </div>
+                    <ul class="skill-list">
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Read extensively in your field of interest</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Learn to use academic databases and research tools</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Understand citation formats (APA, MLA, Chicago)</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Develop a research question and methodology</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Language Proficiency -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                <polyline points="17 6 23 6 23 12"></polyline>
+                            </svg>
+                        </div>
+                        <h2>Language Proficiency</h2>
+                    </div>
+                    <ul class="skill-list">
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Practice English daily through reading and listening</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Join language exchange programs or conversation groups</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Watch academic lectures and take notes</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Write essays on diverse topics regularly</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Professional Development -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                        </div>
+                        <h2>Professional Development</h2>
+                    </div>
+                    <ul class="skill-list">
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Build a strong LinkedIn profile</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Gain relevant internship or work experience</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Develop technical skills relevant to your field</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm check-icon" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Network with professionals and alumni</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <div class="timeline-section">
+                <h2 class="timeline-title">Preparation Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>12-18 Months Before</h3>
+                            <ul>
+                                <li>Research universities and programs</li>
+                                <li>Start test preparation</li>
+                                <li>Build academic profile</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>9-12 Months Before</h3>
+                            <ul>
+                                <li>Take standardized tests</li>
+                                <li>Request recommendation letters</li>
+                                <li>Draft personal statement</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>6-9 Months Before</h3>
+                            <ul>
+                                <li>Complete applications</li>
+                                <li>Apply for scholarships</li>
+                                <li>Prepare financial documents</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <h3>3-6 Months Before</h3>
+                            <ul>
+                                <li>Accept admission offer</li>
+                                <li>Apply for visa</li>
+                                <li>Arrange accommodation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">5</div>
+                        <div class="timeline-content">
+                            <h3>1-3 Months Before</h3>
+                            <ul>
+                                <li>Book flights</li>
+                                <li>Attend pre-departure sessions</li>
+                                <li>Pack and prepare</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <svg class="icon" style="width: 32px; height: 32px; color: #60a5fa;" viewBox="0 0 24 24">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <span>Study Abroad Portal</span>
+                    </div>
+                    <p class="footer-description">
+                        Your comprehensive guide to studying abroad and building a successful international career.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Test Preparation</a></li>
+                        <li><a href="#">University Search</a></li>
+                        <li><a href="#">Scholarship Assistance</a></li>
+                        <li><a href="#">Visa Guidance</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                            <span>info@studyabroad.com</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li>
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Global Education Center</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Study Abroad Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home-script.js"></script>
+    <script src="preparation-tips-script.js"></script>
+</body>
+</html>

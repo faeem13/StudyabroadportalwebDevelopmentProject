@@ -2,13 +2,7 @@ import { useState } from 'react';
 import { X, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-interface LoginModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onLogin: (user: { name: string; email: string }) => void;
-}
-
-export function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
+export function LoginModal({ isOpen, onClose, onLogin }) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,7 +11,7 @@ export function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
     password: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onLogin({ name: formData.name || formData.email.split('@')[0], email: formData.email });
     setFormData({ name: '', email: '', password: '' });

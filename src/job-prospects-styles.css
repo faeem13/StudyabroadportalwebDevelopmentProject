@@ -1,0 +1,228 @@
+/* Job Prospects Page Styles */
+
+.jobs-page {
+    background-color: var(--gray-50);
+    padding: 3rem 0;
+    min-height: calc(100vh - 64px);
+}
+
+.jobs-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Jobs Grid */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 2rem;
+}
+
+.job-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    animation: fadeInUp 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.job-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-blue), var(--primary-purple));
+}
+
+.job-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.job-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.country-flag {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.job-title-group {
+    flex: 1;
+}
+
+.job-country {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+}
+
+.job-market-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.job-market-badge.strong {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.job-market-badge.excellent {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.job-market-badge.good {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.job-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.industries-section {
+    margin-bottom: 1.5rem;
+}
+
+.section-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.75rem;
+}
+
+.industries-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.industry-tag {
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(to right, rgba(37, 99, 235, 0.1), rgba(147, 51, 234, 0.1));
+    color: var(--primary-blue);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.prospects-section,
+.challenges-section {
+    margin-bottom: 1.5rem;
+}
+
+.prospects-list,
+.challenges-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.prospects-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.05), rgba(37, 99, 235, 0.05));
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--gray-700);
+}
+
+.prospects-list li::before {
+    content: '✓';
+    color: #10b981;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.challenges-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: rgba(239, 68, 68, 0.05);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--gray-700);
+}
+
+.challenges-list li::before {
+    content: '⚠';
+    color: #f59e0b;
+    flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .job-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .job-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .country-flag {
+        font-size: 2.5rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

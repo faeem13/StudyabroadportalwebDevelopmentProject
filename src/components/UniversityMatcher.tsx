@@ -3,19 +3,14 @@ import { Search, MapPin, DollarSign, Star, BookOpen, Users, Heart, GitCompare } 
 import { ComparisonTool } from './ComparisonTool';
 import { motion, AnimatePresence } from 'motion/react';
 
-interface UniversityMatcherProps {
-  savedItems: { universities: any[]; scholarships: any[] };
-  setSavedItems: (items: any) => void;
-}
-
-export function UniversityMatcher({ savedItems, setSavedItems }: UniversityMatcherProps) {
+export function UniversityMatcher({ savedItems, setSavedItems }) {
   const [filters, setFilters] = useState({
     country: '',
     field: '',
     budget: '',
     ranking: '',
   });
-  const [compareList, setCompareList] = useState<any[]>([]);
+  const [compareList, setCompareList] = useState([]);
   const [showComparison, setShowComparison] = useState(false);
 
   const universities = [
@@ -96,7 +91,7 @@ export function UniversityMatcher({ savedItems, setSavedItems }: UniversityMatch
     return true;
   });
 
-  const toggleSave = (uni: any) => {
+  const toggleSave = (uni) => {
     const isSaved = savedItems.universities.some((u) => u.name === uni.name);
     if (isSaved) {
       setSavedItems({
@@ -111,7 +106,7 @@ export function UniversityMatcher({ savedItems, setSavedItems }: UniversityMatch
     }
   };
 
-  const toggleCompare = (uni: any) => {
+  const toggleCompare = (uni) => {
     const isInList = compareList.some((u) => u.name === uni.name);
     if (isInList) {
       setCompareList(compareList.filter((u) => u.name !== uni.name));

@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function VisaGuide() {
-  const [expandedCountry, setExpandedCountry] = useState<number | null>(0);
-  const [completedSteps, setCompletedSteps] = useState<{[key: string]: number[]}>({});
+  const [expandedCountry, setExpandedCountry] = useState(0);
+  const [completedSteps, setCompletedSteps] = useState({});
   const countries = [
     {
       name: 'United States',
@@ -194,7 +194,7 @@ export function VisaGuide() {
             const countryKey = country.name.replace(/\s/g, '');
             const completed = completedSteps[countryKey] || [];
 
-            const toggleStep = (stepIndex: number) => {
+            const toggleStep = (stepIndex) => {
               const current = completedSteps[countryKey] || [];
               const newCompleted = current.includes(stepIndex)
                 ? current.filter(i => i !== stepIndex)
