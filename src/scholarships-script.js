@@ -72,7 +72,8 @@ const scholarships = [
 let savedScholarships = [];
 let filters = {
     country: '',
-    level: ''
+    level: '',
+    type: ''
 };
 
 // Initialize
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     const countryFilter = document.getElementById('countryFilter');
     const levelFilter = document.getElementById('levelFilter');
-    const clearFilters = document.getElementById('clearFilters');
+    const typeFilter = document.getElementById('typeFilter');
 
     countryFilter.addEventListener('change', (e) => {
         filters.country = e.target.value;
@@ -97,11 +98,8 @@ function setupEventListeners() {
         renderScholarships();
     });
 
-    clearFilters.addEventListener('click', () => {
-        filters.country = '';
-        filters.level = '';
-        countryFilter.value = '';
-        levelFilter.value = '';
+    typeFilter.addEventListener('change', (e) => {
+        filters.type = e.target.value;
         renderScholarships();
     });
 }
@@ -111,6 +109,7 @@ function getFilteredScholarships() {
     return scholarships.filter(scholarship => {
         if (filters.country && scholarship.country !== filters.country) return false;
         if (filters.level && scholarship.level !== filters.level) return false;
+        if (filters.type && scholarship.type !== filters.type) return false;
         return true;
     });
 }
@@ -171,6 +170,14 @@ function renderScholarships() {
                                 <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
                             </svg>
                             ${scholarship.level}
+                        </div>
+                        <div class="meta-badge">
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <polyline points="17 11 19 13 23 9"></polyline>
+                            </svg>
+                            ${scholarship.type}
                         </div>
                     </div>
                 </div>

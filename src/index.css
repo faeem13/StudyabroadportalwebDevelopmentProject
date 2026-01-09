@@ -4364,23 +4364,6 @@ html {
   display: flex;
 }
 
-.filter-select {
-  border: 1px solid var(--gray-300);
-  cursor: pointer;
-  background-color: #fff;
-  border-radius: 8px;
-  width: 100%;
-  padding: .75rem;
-  font-size: 1rem;
-  transition: border-color .2s;
-}
-
-.filter-select:focus {
-  border-color: var(--primary-blue);
-  outline: none;
-  box-shadow: 0 0 0 3px #2563eb1a;
-}
-
 .btn-clear {
   background-color: var(--gray-100);
   color: var(--gray-700);
@@ -4629,6 +4612,67 @@ html {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+.filters-card {
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px #0000001a;
+}
+
+.filters-header {
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.filters-header svg {
+  color: var(--primary-blue);
+}
+
+.filters-header h2 {
+  color: var(--gray-900);
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.filters-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  display: grid;
+}
+
+.filter-group {
+  flex-direction: column;
+  display: flex;
+}
+
+.filter-group label {
+  color: var(--gray-700);
+  margin-bottom: .5rem;
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.filter-select {
+  border: 1px solid var(--gray-300);
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+  padding: .75rem 1rem;
+  font-size: 1rem;
+  transition: all .2s;
+}
+
+.filter-select:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px #2563eb1a;
 }
 
 .scholarships-grid {
