@@ -2,7 +2,15 @@ import { GraduationCap, Menu, X, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
-export function Navigation({ activeSection, setActiveSection, user, onLoginClick, onLogout }) {
+interface NavigationProps {
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+  user: any;
+  onLoginClick: () => void;
+  onLogout: () => void;
+}
+
+export function Navigation({ activeSection, setActiveSection, user, onLoginClick, onLogout }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -100,7 +108,13 @@ export function Navigation({ activeSection, setActiveSection, user, onLoginClick
                       <p className="text-xs text-gray-600 truncate mt-0.5">{user.email}</p>
                     </div>
                     <div className="py-2">
-                      <button className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all font-medium">
+                      <button 
+                        onClick={() => {
+                          setActiveSection('profile');
+                          setShowUserMenu(false);
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all font-medium"
+                      >
                         👤 Profile
                       </button>
                       <button className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all font-medium">

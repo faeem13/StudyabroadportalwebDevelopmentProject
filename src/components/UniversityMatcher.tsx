@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Search, MapPin, DollarSign, Star, BookOpen, Users, Heart, GitCompare } from 'lucide-react';
 import { ComparisonTool } from './ComparisonTool';
 import { motion, AnimatePresence } from 'motion/react';
+import { useAuth } from '../contexts/AuthContext';
 
-export function UniversityMatcher({ savedItems, setSavedItems }) {
+export function UniversityMatcher() {
+  const { user, saveUniversity, unsaveUniversity, isUniversitySaved } = useAuth();
   const [filters, setFilters] = useState({
     country: '',
     field: '',
@@ -90,21 +92,6 @@ export function UniversityMatcher({ savedItems, setSavedItems }) {
     if (filters.field && !uni.programs.includes(filters.field)) return false;
     return true;
   });
-
-  const toggleSave = (uni) => {
-    const isSaved = savedItems.universities.some((u) => u.name === uni.name);
-    if (isSaved) {
-      setSavedItems({
-        ...savedItems,
-        universities: savedItems.universities.filter((u) => u.name !== uni.name),
-      });
-    } else {
-      setSavedItems({
-        ...savedItems,
-        universities: [...savedItems.universities, uni],
-      });
-    }
-  };
 
   const toggleCompare = (uni) => {
     const isInList = compareList.some((u) => u.name === uni.name);
@@ -246,7 +233,7 @@ export function UniversityMatcher({ savedItems, setSavedItems }) {
         {/* University Cards */}
         <div className="space-y-6">
           {filteredUniversities.map((uni, index) => {
-            const isSaved = savedItems.universities.some((u) => u.name === uni.name);
+            const isSaved = isUniversitySaved(uni.name);
             const isComparing = compareList.some((u) => u.name === uni.name);
 
             return (
@@ -342,7 +329,7 @@ export function UniversityMatcher({ savedItems, setSavedItems }) {
                     {isComparing ? 'Remove from Compare' : 'Compare'}
                   </motion.button>
                   <motion.button
-                    onClick={() => toggleSave(uni)}
+                    onClick={() => isSaved ? unsaveUniversity(uni.name) : saveUniversity(uni.name)}
                     className={`px-6 py-2 border rounded-lg transition-colors flex items-center gap-2 ${
                       isSaved
                         ? 'border-red-600 bg-red-50 text-red-700'

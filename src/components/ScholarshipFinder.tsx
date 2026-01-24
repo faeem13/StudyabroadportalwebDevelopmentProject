@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Award, DollarSign, Calendar, Users, CheckCircle, Search, Heart, Bell } from 'lucide-react';
+import { Award, DollarSign, Calendar, Users, CheckCircle, Search, Heart, Bell, Bookmark } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useAuth } from '../contexts/AuthContext';
 
-export function ScholarshipFinder({ savedItems, setSavedItems }) {
+export function ScholarshipFinder() {
+  const { user, saveScholarship, unsaveScholarship, isScholarshipSaved } = useAuth();
   const [filters, setFilters] = useState({
     country: '',
     level: '',
@@ -90,17 +92,10 @@ export function ScholarshipFinder({ savedItems, setSavedItems }) {
   });
 
   const toggleSave = (scholarship) => {
-    const isSaved = savedItems.scholarships.some((s) => s.name === scholarship.name);
-    if (isSaved) {
-      setSavedItems({
-        ...savedItems,
-        scholarships: savedItems.scholarships.filter((s) => s.name !== scholarship.name),
-      });
+    if (isScholarshipSaved(scholarship.name)) {
+      unsaveScholarship(scholarship.name);
     } else {
-      setSavedItems({
-        ...savedItems,
-        scholarships: [...savedItems.scholarships, scholarship],
-      });
+      saveScholarship(scholarship);
     }
   };
 
@@ -182,7 +177,7 @@ export function ScholarshipFinder({ savedItems, setSavedItems }) {
         {/* Scholarship Cards */}
         <div className="space-y-6">
           {filteredScholarships.map((scholarship, index) => {
-            const isSaved = savedItems.scholarships.some((s) => s.name === scholarship.name);
+            const isSaved = isScholarshipSaved(scholarship.name);
             const hasReminder = reminders.includes(scholarship.name);
 
             return (

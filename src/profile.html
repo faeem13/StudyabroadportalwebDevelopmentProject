@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Study Abroad Portal</title>
+    <link rel="stylesheet" href="profile-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand" onclick="window.location.href='home.html'" style="cursor: pointer;">
+                <div class="brand-icon">🎓</div>
+                <span class="brand-text">Study Abroad Portal</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span class="hamburger"></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="home.html">Home</a>
+                <a href="preparation-tips.html">Preparation Tips</a>
+                <a href="test-prep.html">Test Prep</a>
+                <a href="universities.html">Universities</a>
+                <a href="scholarships.html">Scholarships</a>
+                <a href="visa-guide.html">Visa Guide</a>
+                <a href="job-prospects.html">Job Prospects</a>
+                <div class="user-menu">
+                    <button class="user-btn" id="userMenuBtn">
+                        <div class="user-avatar">
+                            <span id="userInitial">U</span>
+                        </div>
+                        <span id="userName">User</span>
+                        <svg class="dropdown-arrow" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-header">
+                            <p class="dropdown-name" id="dropdownName">User Name</p>
+                            <p class="dropdown-email" id="dropdownEmail">user@example.com</p>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="profile.html" class="dropdown-item active">👤 Profile</a>
+                            <a href="#saved" class="dropdown-item">💾 Saved Items</a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <button class="logout-btn" id="logoutBtn">
+                                <svg class="logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Required Message -->
+    <div class="login-required" id="loginRequired" style="display: none;">
+        <div class="login-required-content">
+            <div class="lock-icon">🔒</div>
+            <h2>Login Required</h2>
+            <p>Please log in to view your profile and saved items.</p>
+            <button class="btn-primary" onclick="window.location.href='login.html'">Go to Login</button>
+        </div>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-container" id="profileContent">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="header-content">
+                <div class="profile-avatar-large">
+                    <span id="profileInitial">U</span>
+                </div>
+                <div class="profile-header-info">
+                    <h1 id="profileHeaderName">User Name</h1>
+                    <p id="profileHeaderEmail">user@example.com</p>
+                </div>
+            </div>
+            <button class="btn-logout" id="headerLogoutBtn">Logout</button>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="profile-grid">
+            <!-- Left Column - Profile Information -->
+            <div class="profile-main">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>Profile Information</h2>
+                        <button class="btn-edit" id="editBtn">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                            Edit Profile
+                        </button>
+                        <div class="btn-group" id="editControls" style="display: none;">
+                            <button class="btn-save" id="saveBtn">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Save
+                            </button>
+                            <button class="btn-cancel" id="cancelBtn">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <form id="profileForm" class="profile-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Full Name
+                                </label>
+                                <input type="text" id="inputName" class="form-input" disabled>
+                                <span class="display-value" id="displayName"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    Email Address
+                                </label>
+                                <span class="display-value" id="displayEmail"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    Phone Number
+                                </label>
+                                <input type="tel" id="inputPhone" class="form-input" disabled>
+                                <span class="display-value" id="displayPhone"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    Country
+                                </label>
+                                <input type="text" id="inputCountry" class="form-input" disabled>
+                                <span class="display-value" id="displayCountry"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    Date of Birth
+                                </label>
+                                <input type="date" id="inputDOB" class="form-input" disabled>
+                                <span class="display-value" id="displayDOB"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                    </svg>
+                                    Current Education
+                                </label>
+                                <select id="inputEducation" class="form-input" disabled>
+                                    <option value="">Select...</option>
+                                    <option value="High School">High School</option>
+                                    <option value="Bachelor's">Bachelor's</option>
+                                    <option value="Master's">Master's</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
+                                <span class="display-value" id="displayEducation"></span>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label>
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                    </svg>
+                                    Target Degree
+                                </label>
+                                <select id="inputTargetDegree" class="form-input" disabled>
+                                    <option value="">Select...</option>
+                                    <option value="Bachelor's">Bachelor's</option>
+                                    <option value="Master's">Master's</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="MBA">MBA</option>
+                                </select>
+                                <span class="display-value" id="displayTargetDegree"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column - Stats and Saved Items -->
+            <div class="profile-sidebar">
+                <!-- Activity Stats -->
+                <div class="stats-card">
+                    <h3>Your Activity</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item stat-blue">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-info">
+                                <span class="stat-label">Saved Scholarships</span>
+                                <span class="stat-value" id="scholarshipCount">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-item stat-purple">
+                            <div class="stat-icon">🏛️</div>
+                            <div class="stat-info">
+                                <span class="stat-label">Saved Universities</span>
+                                <span class="stat-value" id="universityCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Scholarships -->
+                <div class="saved-card" id="savedScholarshipsCard" style="display: none;">
+                    <h3>Saved Scholarships</h3>
+                    <div class="saved-list" id="savedScholarshipsList"></div>
+                </div>
+
+                <!-- Saved Universities -->
+                <div class="saved-card" id="savedUniversitiesCard" style="display: none;">
+                    <h3>Saved Universities</h3>
+                    <div class="saved-list" id="savedUniversitiesList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="profile-script.js"></script>
+</body>
+</html>

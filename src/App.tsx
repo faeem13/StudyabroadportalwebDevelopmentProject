@@ -8,25 +8,15 @@ import { VisaGuide } from './components/VisaGuide';
 import { JobProspects } from './components/JobProspects';
 import { PreparationTips } from './components/PreparationTips';
 import { Footer } from './components/Footer';
-import { LoginModal } from './components/LoginModal';
+import { AuthModal } from './components/AuthModal';
+import { UserProfile } from './components/UserProfile';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function App() {
+function AppContent() {
   const [activeSection, setActiveSection] = useState('home');
-  const [savedItems, setSavedItems] = useState({
-    universities: [],
-    scholarships: [],
-  });
-  const [showLogin, setShowLogin] = useState(false);
-  const [user, setUser] = useState(null);
-
-  const handleLogin = (userData) => {
-    setUser(userData);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { user, logout } = useAuth();
 
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
@@ -40,14 +30,13 @@ export default function App() {
         activeSection={activeSection} 
         setActiveSection={setActiveSection}
         user={user}
-        onLoginClick={() => setShowLogin(true)}
-        onLogout={handleLogout}
+        onLoginClick={() => setShowAuthModal(true)}
+        onLogout={logout}
       />
       
-      <LoginModal
-        isOpen={showLogin}
-        onClose={() => setShowLogin(false)}
-        onLogin={handleLogin}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
       />
       
       <AnimatePresence mode="wait">
@@ -63,17 +52,26 @@ export default function App() {
           {activeSection === 'preparation' && <PreparationTips />}
           {activeSection === 'tests' && <TestPreparation />}
           {activeSection === 'universities' && (
-            <UniversityMatcher savedItems={savedItems} setSavedItems={setSavedItems} />
+            <UniversityMatcher />
           )}
           {activeSection === 'scholarships' && (
-            <ScholarshipFinder savedItems={savedItems} setSavedItems={setSavedItems} />
+            <ScholarshipFinder />
           )}
           {activeSection === 'visa' && <VisaGuide />}
           {activeSection === 'jobs' && <JobProspects />}
+          {activeSection === 'profile' && user && <UserProfile />}
         </motion.div>
       </AnimatePresence>
       
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
