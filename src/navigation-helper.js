@@ -40,41 +40,71 @@ function initializeNavigation() {
  */
 function checkUserSession() {
     try {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const currentUserId = localStorage.getItem('currentUserId');
         const loginBtn = document.getElementById('loginBtn');
         const loginBtnMobile = document.getElementById('loginBtnMobile');
         
-        if (currentUser && currentUser.email) {
-            // User is logged in
-            if (loginBtn) {
-                loginBtn.textContent = currentUser.name || currentUser.email.split('@')[0];
-                loginBtn.onclick = function() {
-                    window.location.href = 'profile.html';
-                };
-            }
-            if (loginBtnMobile) {
-                loginBtnMobile.textContent = currentUser.name || currentUser.email.split('@')[0];
-                loginBtnMobile.onclick = function() {
-                    window.location.href = 'profile.html';
-                };
+        console.log('🔍 Checking user session...', { currentUserId });
+        
+        if (currentUserId) {
+            // Get user from users array
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const currentUser = users.find(u => u.id === currentUserId);
+            
+            console.log('👤 Found user:', currentUser);
+            
+            if (currentUser) {
+                // User is logged in
+                const displayName = currentUser.name || currentUser.email.split('@')[0];
+                
+                console.log('✅ User logged in, displaying:', displayName);
+                
+                if (loginBtn) {
+                    loginBtn.textContent = displayName;
+                    loginBtn.onclick = function() {
+                        window.location.href = 'profile.html';
+                    };
+                }
+                if (loginBtnMobile) {
+                    loginBtnMobile.textContent = displayName;
+                    loginBtnMobile.onclick = function() {
+                        window.location.href = 'profile.html';
+                    };
+                }
+            } else {
+                // User ID exists but user not found - clear and show login
+                console.warn('⚠️ User ID found but user not in database, clearing...');
+                localStorage.removeItem('currentUserId');
+                setLoginButtonsToDefault(loginBtn, loginBtnMobile);
             }
         } else {
             // User is not logged in
-            if (loginBtn) {
-                loginBtn.textContent = 'Login';
-                loginBtn.onclick = function() {
-                    window.location.href = 'login.html';
-                };
-            }
-            if (loginBtnMobile) {
-                loginBtnMobile.textContent = 'Login';
-                loginBtnMobile.onclick = function() {
-                    window.location.href = 'login.html';
-                };
-            }
+            console.log('❌ No user logged in');
+            setLoginButtonsToDefault(loginBtn, loginBtnMobile);
         }
     } catch (error) {
         console.error('Error checking user session:', error);
+        const loginBtn = document.getElementById('loginBtn');
+        const loginBtnMobile = document.getElementById('loginBtnMobile');
+        setLoginButtonsToDefault(loginBtn, loginBtnMobile);
+    }
+}
+
+/**
+ * Set login buttons to default state (not logged in)
+ */
+function setLoginButtonsToDefault(loginBtn, loginBtnMobile) {
+    if (loginBtn) {
+        loginBtn.textContent = 'Login';
+        loginBtn.onclick = function() {
+            window.location.href = 'login.html';
+        };
+    }
+    if (loginBtnMobile) {
+        loginBtnMobile.textContent = 'Login';
+        loginBtnMobile.onclick = function() {
+            window.location.href = 'login.html';
+        };
     }
 }
 
@@ -176,8 +206,15 @@ function scrollToTop() {
  */
 function getCurrentUser() {
     try {
-        return JSON.parse(localStorage.getItem('currentUser'));
+        const currentUserId = localStorage.getItem('currentUserId');
+        if (!currentUserId) {
+            return null;
+        }
+        
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        return users.find(u => u.id === currentUserId) || null;
     } catch (error) {
+        console.error('Error getting current user:', error);
         return null;
     }
 }
@@ -187,8 +224,8 @@ function getCurrentUser() {
  * @returns {boolean} True if user is logged in
  */
 function isUserLoggedIn() {
-    const user = getCurrentUser();
-    return user !== null && user.email;
+    const currentUserId = localStorage.getItem('currentUserId');
+    return currentUserId !== null && currentUserId !== undefined;
 }
 
 /**
@@ -211,7 +248,7 @@ function requireLogin(returnUrl) {
  */
 function logoutUser() {
     if (confirm('Are you sure you want to logout?')) {
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('currentUserId');
         window.location.href = 'home.html';
     }
 }
