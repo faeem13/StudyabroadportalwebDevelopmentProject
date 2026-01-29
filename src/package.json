@@ -2,6 +2,7 @@
   "name": "study-abroad-portal-standalone",
   "version": "1.0.0",
   "description": "Study Abroad Portal - Standalone HTML/CSS/JavaScript Version",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
