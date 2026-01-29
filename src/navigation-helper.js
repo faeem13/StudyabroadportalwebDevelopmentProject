@@ -47,33 +47,40 @@ function checkUserSession() {
         console.log('🔍 Checking user session...', { currentUserId });
         
         if (currentUserId) {
-            // Get user from users array
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const currentUser = users.find(u => u.id === currentUserId);
-            
-            console.log('👤 Found user:', currentUser);
-            
-            if (currentUser) {
-                // User is logged in
-                const displayName = currentUser.name || currentUser.email.split('@')[0];
+            // Get user from localStorage cache
+            const currentUserStr = localStorage.getItem('currentUser');
+            if (currentUserStr) {
+                const currentUser = JSON.parse(currentUserStr);
                 
-                console.log('✅ User logged in, displaying:', displayName);
+                console.log('👤 Found user:', currentUser);
                 
-                if (loginBtn) {
-                    loginBtn.textContent = displayName;
-                    loginBtn.onclick = function() {
-                        window.location.href = 'profile.html';
-                    };
-                }
-                if (loginBtnMobile) {
-                    loginBtnMobile.textContent = displayName;
-                    loginBtnMobile.onclick = function() {
-                        window.location.href = 'profile.html';
-                    };
+                if (currentUser) {
+                    // User is logged in
+                    const displayName = currentUser.name || currentUser.email.split('@')[0];
+                    
+                    console.log('✅ User logged in, displaying:', displayName);
+                    
+                    if (loginBtn) {
+                        loginBtn.textContent = displayName;
+                        loginBtn.onclick = function() {
+                            window.location.href = 'profile.html';
+                        };
+                    }
+                    if (loginBtnMobile) {
+                        loginBtnMobile.textContent = displayName;
+                        loginBtnMobile.onclick = function() {
+                            window.location.href = 'profile.html';
+                        };
+                    }
+                } else {
+                    // User ID exists but user not found - clear and show login
+                    console.warn('⚠️ User ID found but user data not cached, clearing...');
+                    localStorage.removeItem('currentUserId');
+                    setLoginButtonsToDefault(loginBtn, loginBtnMobile);
                 }
             } else {
                 // User ID exists but user not found - clear and show login
-                console.warn('⚠️ User ID found but user not in database, clearing...');
+                console.warn('⚠️ User ID found but user data not cached, clearing...');
                 localStorage.removeItem('currentUserId');
                 setLoginButtonsToDefault(loginBtn, loginBtnMobile);
             }
@@ -97,13 +104,13 @@ function setLoginButtonsToDefault(loginBtn, loginBtnMobile) {
     if (loginBtn) {
         loginBtn.textContent = 'Login';
         loginBtn.onclick = function() {
-            window.location.href = '/login';
+            window.location.href = 'login.html';
         };
     }
     if (loginBtnMobile) {
         loginBtnMobile.textContent = 'Login';
         loginBtnMobile.onclick = function() {
-            window.location.href = '/login';
+            window.location.href = 'login.html';
         };
     }
 }
@@ -211,8 +218,13 @@ function getCurrentUser() {
             return null;
         }
         
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        return users.find(u => u.id === currentUserId) || null;
+        // Get user from localStorage cache
+        const currentUserStr = localStorage.getItem('currentUser');
+        if (currentUserStr) {
+            return JSON.parse(currentUserStr);
+        }
+        
+        return null;
     } catch (error) {
         console.error('Error getting current user:', error);
         return null;
