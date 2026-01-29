@@ -13,47 +13,65 @@ class ProfileManager {
     }
 
     async init() {
+        console.log('🔄 Initializing profile page...');
+        
         // Check if user is logged in
         await this.loadCurrentUser();
         
         if (!this.currentUser) {
+            console.log('❌ No user found, showing login required');
             this.showLoginRequired();
             return;
         }
 
+        console.log('✅ User loaded:', this.currentUser);
+        
         this.setupEventListeners();
         this.loadProfileData();
         await this.loadSavedItems();
         this.updateNavigation();
+        
+        console.log('✅ Profile page initialized successfully');
     }
 
     // Load current user from database
     async loadCurrentUser() {
         const currentUserId = localStorage.getItem('currentUserId');
         
+        console.log('📝 Loading user with ID:', currentUserId);
+        
         if (!currentUserId) {
+            console.log('❌ No user ID in localStorage');
             return;
         }
 
         try {
+            console.log('🌐 Fetching user from API...');
             const response = await fetch(`${this.apiBaseUrl}/api/user/${currentUserId}`);
             const data = await response.json();
+
+            console.log('📥 API Response:', data);
 
             if (response.ok && data.success) {
                 this.currentUser = data.user;
                 // Update localStorage cache
                 localStorage.setItem('currentUser', JSON.stringify(data.user));
+                console.log('✅ User loaded from database');
             } else {
                 // User not found in database, clear localStorage
+                console.warn('⚠️ User not found in database');
                 localStorage.removeItem('currentUserId');
                 localStorage.removeItem('currentUser');
             }
         } catch (error) {
-            console.error('Error loading user:', error);
+            console.error('❌ Error loading user from API:', error);
             // Try to use cached data if available
             const cachedUser = localStorage.getItem('currentUser');
             if (cachedUser) {
+                console.log('📦 Using cached user data');
                 this.currentUser = JSON.parse(cachedUser);
+            } else {
+                console.error('❌ No cached user data available');
             }
         }
     }
