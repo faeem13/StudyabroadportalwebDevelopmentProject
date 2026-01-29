@@ -1,0 +1,33 @@
+{
+  "name": "study-abroad-portal",
+  "version": "2.0.0",
+  "description": "Comprehensive Study Abroad Portal with authentication, university matching, scholarship finder, and more",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "study-abroad",
+    "education",
+    "portal",
+    "university",
+    "scholarship",
+    "visa",
+    "IELTS",
+    "GRE",
+    "TOEFL"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
