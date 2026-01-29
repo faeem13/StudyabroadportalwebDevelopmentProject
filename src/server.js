@@ -346,10 +346,10 @@ app.listen(PORT, () => {
     console.log('  🌐 Local:    http://localhost:' + PORT);
     console.log('  🌐 Network:  http://' + HOST + ':' + PORT);
     console.log('');
-    console.log('╔════════════════════════════════════════════════════════════╗');
+    console.log('╔════════════════════���═══════════════════════════════════════╗');
     console.log('║  Available Pages:                                          ║');
     console.log('╠════════════════════════════════════════════════════════════╣');
-    console.log('║  • Home:             http://localhost:' + PORT + '/                    ║');
+    console.log('║  • Home:             http://localhost:' + PORT + '/home               ║');
     console.log('║  • Start Page:       http://localhost:' + PORT + '/start              ║');
     console.log('║  • Login:            http://localhost:' + PORT + '/login              ║');
     console.log('║  • Profile:          http://localhost:' + PORT + '/profile            ║');

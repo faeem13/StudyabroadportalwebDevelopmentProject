@@ -131,25 +131,6 @@ if (statsSection) {
     statsObserver.observe(statsSection);
 }
 
-// Login Button Handlers
-const loginBtn = document.getElementById('loginBtn');
-const loginBtnMobile = document.getElementById('loginBtnMobile');
-
-if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
-        alert('Login modal would open here. In the full application, this would show a login form.');
-    });
-}
-
-if (loginBtnMobile) {
-    loginBtnMobile.addEventListener('click', () => {
-        alert('Login modal would open here. In the full application, this would show a login form.');
-        mobileNav.classList.remove('active');
-        menuIcon.style.display = 'block';
-        closeIcon.style.display = 'none';
-    });
-}
-
 // Add hover effects to feature cards
 featureCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
