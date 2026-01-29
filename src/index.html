@@ -1,13 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Study Abroad Portal - Your Complete Guide to International Education</title>
-    <meta name="description" content="Comprehensive study abroad portal with IELTS/GRE/TOEFL preparation, university matching, scholarship finder, visa guidance, and job prospects." />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad Portal</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/animations.css">
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav id="navigation" class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div id="logoArea" class="flex items-center gap-2 cursor-pointer hover-scale">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Study Abroad Portal
+                    </span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div id="desktopNav" class="hidden md:flex items-center gap-2">
+                    <button data-section="home" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-blue-600 bg-blue-50 hover-lift">
+                        Home
+                        <div class="active-indicator absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
+                    </button>
+                    <button data-section="preparation" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Preparation Tips</button>
+                    <button data-section="tests" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Test Prep</button>
+                    <button data-section="universities" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Universities</button>
+                    <button data-section="scholarships" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Scholarships</button>
+                    <button data-section="visa" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Visa Guide</button>
+                    <button data-section="jobs" class="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover-lift">Job Prospects</button>
+                    
+                    <!-- User Menu Area -->
+                    <div id="userMenuArea" class="ml-2"></div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-lg hover:bg-gray-100 transition-colors">
+                    <svg id="menuIcon" class="w-6 h-6 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 text-gray-700 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileNav" class="md:hidden hidden py-4 border-t border-gray-200">
+                <button data-section="home" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-md">Home</button>
+                <button data-section="preparation" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Preparation Tips</button>
+                <button data-section="tests" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Test Prep</button>
+                <button data-section="universities" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Universities</button>
+                <button data-section="scholarships" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Scholarships</button>
+                <button data-section="visa" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Visa Guide</button>
+                <button data-section="jobs" class="mobile-nav-link block w-full text-left px-4 py-3 rounded-lg font-medium transition-all mb-1 text-gray-700 hover:text-blue-600 hover:bg-blue-50">Job Prospects</button>
+                
+                <!-- Mobile Login Area -->
+                <div id="mobileUserArea" class="mt-4 px-4"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="page-transition"></main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <span class="text-xl">Study Abroad Portal</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Your comprehensive guide to studying abroad and building a successful international career.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Resources</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg mb-4">Services</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Test Preparation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">University Search</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Scholarship Assistance</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Visa Guidance</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg mb-4">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>info@studyabroad.com</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Global Education Center</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Study Abroad Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-2xl text-gray-900">Welcome Back</h2>
+                <button id="closeLoginModal" class="close-button">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="loginName" class="block text-gray-700 mb-2">Name</label>
+                    <input type="text" id="loginName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="loginEmail" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/scripts/utils.js"></script>
+    <script src="/scripts/auth.js"></script>
+    <script src="/scripts/navigation.js"></script>
+    <script src="/scripts/pages/home.js"></script>
+    <script src="/scripts/pages/preparation.js"></script>
+    <script src="/scripts/pages/tests.js"></script>
+    <script src="/scripts/pages/universities.js"></script>
+    <script src="/scripts/pages/scholarships.js"></script>
+    <script src="/scripts/pages/visa.js"></script>
+    <script src="/scripts/pages/jobs.js"></script>
+    <script src="/scripts/app.js"></script>
+</body>
 </html>
