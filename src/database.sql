@@ -75,7 +75,7 @@ CREATE TABLE saved_scholarships (
                                     scholarship_name VARCHAR(255) NOT NULL,
                                     country VARCHAR(100) NOT NULL,
                                     amount VARCHAR(100) DEFAULT NULL COMMENT 'Stores amount as string (e.g., Full funding, $50,000)',
-                                    deadline DATE DEFAULT NULL,
+                                    deadline VARCHAR(100) DEFAULT NULL COMMENT 'Stores deadline as string (e.g., November 2025, 2025-11-01)',
                                     eligibility TEXT DEFAULT NULL,
                                     application_url TEXT DEFAULT NULL,
                                     notes TEXT DEFAULT NULL,
