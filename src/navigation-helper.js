@@ -97,13 +97,13 @@ function setLoginButtonsToDefault(loginBtn, loginBtnMobile) {
     if (loginBtn) {
         loginBtn.textContent = 'Login';
         loginBtn.onclick = function() {
-            window.location.href = 'login.html';
+            window.location.href = '/login';
         };
     }
     if (loginBtnMobile) {
         loginBtnMobile.textContent = 'Login';
         loginBtnMobile.onclick = function() {
-            window.location.href = 'login.html';
+            window.location.href = '/login';
         };
     }
 }
