@@ -1,5 +1,5 @@
 // Universities Data
-const universities = [
+const universitiesData = [
     {
         name: 'Massachusetts Institute of Technology',
         country: 'USA',
@@ -108,7 +108,7 @@ function setupEventListeners() {
 
 // Filter Universities
 function getFilteredUniversities() {
-    return universities.filter(uni => {
+    return universitiesData.filter(uni => {
         if (filters.country && uni.country !== filters.country) return false;
         if (filters.field && !uni.programs.includes(filters.field)) return false;
         return true;
@@ -206,14 +206,101 @@ function renderUniversities() {
 }
 
 // Toggle Save
-function toggleSave(uniName) {
-    const index = savedUniversities.indexOf(uniName);
-    if (index > -1) {
-        savedUniversities.splice(index, 1);
-    } else {
-        savedUniversities.push(uniName);
+async function toggleSave(uniName) {
+    // Check if user is logged in
+    const currentUserId = localStorage.getItem('currentUserId');
+    if (!currentUserId) {
+        alert('Please login to save universities');
+        window.location.href = 'login.html';
+        return;
     }
-    renderUniversities();
+
+    // Find the university data
+    const university = universitiesData.find(u => u.name === uniName);
+    if (!university) {
+        console.error('University not found');
+        return;
+    }
+
+    const index = savedUniversities.indexOf(uniName);
+    
+    try {
+        if (index > -1) {
+            // Remove from saved (not implemented yet - would need university ID from database)
+            savedUniversities.splice(index, 1);
+            showNotification('University removed from saved items', 'info');
+        } else {
+            // Save to database
+            const response = await fetch(`${window.location.origin}/api/user/${currentUserId}/universities`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    universityName: university.name,
+                    country: university.country,
+                    ranking: university.ranking,
+                    tuitionFee: university.tuition,
+                    acceptanceRate: university.acceptance,
+                    program: university.programs.join(', '),
+                    notes: ''
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                savedUniversities.push(uniName);
+                showNotification('University saved successfully!', 'success');
+            } else {
+                showNotification('Failed to save university', 'error');
+                return;
+            }
+        }
+        
+        renderUniversities();
+    } catch (error) {
+        console.error('Error saving university:', error);
+        showNotification('Connection error. Please check if the server is running.', 'error');
+    }
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-width: 350px;
+    `;
+    
+    const colors = {
+        success: '#10b981',
+        error: '#ef4444',
+        info: '#3b82f6',
+        warning: '#f59e0b'
+    };
+    notification.style.backgroundColor = colors[type] || colors.info;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-out';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
 }
 
 // Learn More

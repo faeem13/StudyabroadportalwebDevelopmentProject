@@ -1,5 +1,5 @@
 // Scholarships Data
-const scholarships = [
+const scholarshipsData = [
     {
         name: 'Fulbright Foreign Student Program',
         country: 'USA',
@@ -106,7 +106,7 @@ function setupEventListeners() {
 
 // Filter Scholarships
 function getFilteredScholarships() {
-    return scholarships.filter(scholarship => {
+    return scholarshipsData.filter(scholarship => {
         if (filters.country && scholarship.country !== filters.country) return false;
         if (filters.level && scholarship.level !== filters.level) return false;
         if (filters.type && scholarship.type !== filters.type) return false;
@@ -230,14 +230,101 @@ function renderScholarships() {
 }
 
 // Toggle Save
-function toggleSaveScholarship(scholarshipName) {
-    const index = savedScholarships.indexOf(scholarshipName);
-    if (index > -1) {
-        savedScholarships.splice(index, 1);
-    } else {
-        savedScholarships.push(scholarshipName);
+async function toggleSaveScholarship(scholarshipName) {
+    // Check if user is logged in
+    const currentUserId = localStorage.getItem('currentUserId');
+    if (!currentUserId) {
+        alert('Please login to save scholarships');
+        window.location.href = 'login.html';
+        return;
     }
-    renderScholarships();
+
+    // Find the scholarship data
+    const scholarship = scholarshipsData.find(s => s.name === scholarshipName);
+    if (!scholarship) {
+        console.error('Scholarship not found');
+        return;
+    }
+
+    const index = savedScholarships.indexOf(scholarshipName);
+    
+    try {
+        if (index > -1) {
+            // Remove from saved (not implemented yet - would need scholarship ID from database)
+            savedScholarships.splice(index, 1);
+            showNotification('Scholarship removed from saved items', 'info');
+        } else {
+            // Save to database
+            const response = await fetch(`${window.location.origin}/api/user/${currentUserId}/scholarships`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    scholarshipName: scholarship.name,
+                    country: scholarship.country,
+                    amount: parseFloat(scholarship.amount.replace(/[^0-9.]/g, '')),
+                    deadline: scholarship.deadline,
+                    eligibility: scholarship.eligibility.join(', '),
+                    applicationUrl: '#',
+                    notes: ''
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                savedScholarships.push(scholarshipName);
+                showNotification('Scholarship saved successfully!', 'success');
+            } else {
+                showNotification('Failed to save scholarship', 'error');
+                return;
+            }
+        }
+        
+        renderScholarships();
+    } catch (error) {
+        console.error('Error saving scholarship:', error);
+        showNotification('Connection error. Please check if the server is running.', 'error');
+    }
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-width: 350px;
+    `;
+    
+    const colors = {
+        success: '#10b981',
+        error: '#ef4444',
+        info: '#3b82f6',
+        warning: '#f59e0b'
+    };
+    notification.style.backgroundColor = colors[type] || colors.info;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-out';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
 }
 
 // Apply

@@ -1,14 +1,19 @@
-// Authentication Manager
+// ================================================================
+// AUTHENTICATION MANAGER - DATABASE CONNECTED
+// ================================================================
+// Handles user authentication with MySQL database
+// ================================================================
+
 class AuthManager {
     constructor() {
         this.currentForm = 'login';
+        this.apiBaseUrl = window.location.origin; // Use current server origin
         this.init();
     }
 
     init() {
         this.setupEventListeners();
         this.checkIfAlreadyLoggedIn();
-        this.createDemoAccount();
     }
 
     // Check if user is already logged in
@@ -155,16 +160,7 @@ class AuthManager {
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
-
-        if (user) {
-            alert(`Password reset link has been sent to ${email}\n\n(Demo: Check console for password)`);
-            const passwords = JSON.parse(localStorage.getItem('passwords') || '{}');
-            console.log(`Password for ${email}: ${passwords[user.id]}`);
-        } else {
-            alert('No account found with this email address.');
-        }
+        alert(`Password reset functionality will be added soon.\n\nFor now, please contact support at: support@studyabroad.com`);
     }
 
     // Handle social login
@@ -173,7 +169,7 @@ class AuthManager {
         alert(`${provider} authentication would be integrated here.\n\nThis is a demo - please use email/password login or create an account.`);
     }
 
-    // Handle login
+    // Handle login - DATABASE VERSION
     async handleLogin() {
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value;
@@ -192,41 +188,43 @@ class AuthManager {
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
 
-        await this.sleep(800);
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const passwords = JSON.parse(localStorage.getItem('passwords') || '{}');
+            const data = await response.json();
 
-        const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+            if (response.ok && data.success) {
+                // Store user data in localStorage
+                localStorage.setItem('currentUserId', data.user.id);
+                localStorage.setItem('currentUser', JSON.stringify(data.user));
+                
+                if (rememberMe) {
+                    localStorage.setItem('rememberMe', 'true');
+                }
 
-        if (!user) {
-            this.showError(errorEl, 'No account found with this email address');
+                this.showSuccess(successEl, 'Login successful! Redirecting to your profile...');
+                await this.sleep(1500);
+                window.location.href = 'profile.html';
+            } else {
+                this.showError(errorEl, data.message || 'Login failed. Please try again.');
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            this.showError(errorEl, 'Connection error. Please check if the server is running.');
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
-            return;
         }
-
-        if (passwords[user.id] !== password) {
-            this.showError(errorEl, 'Incorrect password. Please try again.');
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-            return;
-        }
-
-        if (rememberMe) {
-            localStorage.setItem('rememberMe', 'true');
-        } else {
-            localStorage.removeItem('rememberMe');
-        }
-
-        localStorage.setItem('currentUserId', user.id);
-
-        this.showSuccess(successEl, 'Login successful! Redirecting to your profile...');
-        await this.sleep(1500);
-        window.location.href = 'profile.html';
     }
 
-    // Handle signup
+    // Handle signup - DATABASE VERSION
     async handleSignup() {
         const name = document.getElementById('signupName').value.trim();
         const email = document.getElementById('signupEmail').value.trim();
@@ -260,42 +258,36 @@ class AuthManager {
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
 
-        await this.sleep(800);
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, password })
+            });
 
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const passwords = JSON.parse(localStorage.getItem('passwords') || '{}');
+            const data = await response.json();
 
-        if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-            this.showError(errorEl, 'An account with this email already exists');
+            if (response.ok && data.success) {
+                // Store user data in localStorage
+                localStorage.setItem('currentUserId', data.user.id);
+                localStorage.setItem('currentUser', JSON.stringify(data.user));
+
+                this.showSuccess(successEl, 'Account created successfully! Welcome aboard!');
+                await this.sleep(1500);
+                window.location.href = 'profile.html';
+            } else {
+                this.showError(errorEl, data.message || 'Registration failed. Please try again.');
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Signup error:', error);
+            this.showError(errorEl, 'Connection error. Please check if the server is running.');
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
-            return;
         }
-
-        const newUser = {
-            id: Date.now().toString(),
-            email: email,
-            name: name,
-            phone: '',
-            country: '',
-            dateOfBirth: '',
-            education: '',
-            targetDegree: '',
-            savedScholarships: [],
-            savedUniversities: [],
-            createdAt: new Date().toISOString()
-        };
-
-        users.push(newUser);
-        passwords[newUser.id] = password;
-
-        localStorage.setItem('users', JSON.stringify(users));
-        localStorage.setItem('passwords', JSON.stringify(passwords));
-        localStorage.setItem('currentUserId', newUser.id);
-
-        this.showSuccess(successEl, 'Account created successfully! Welcome aboard!');
-        await this.sleep(1500);
-        window.location.href = 'profile.html';
     }
 
     // Validate email
@@ -331,40 +323,6 @@ class AuthManager {
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
-    // Create demo account
-    createDemoAccount() {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const passwords = JSON.parse(localStorage.getItem('passwords') || '{}');
-
-        if (!users.find(u => u.email === 'demo@example.com')) {
-            const demoUser = {
-                id: 'demo-user-001',
-                email: 'demo@example.com',
-                name: 'Demo User',
-                phone: '+1 234-567-8900',
-                country: 'United States',
-                dateOfBirth: '2000-01-15',
-                education: "Bachelor's",
-                targetDegree: "Master's",
-                savedScholarships: [
-                    'Fulbright Foreign Student Program',
-                    'Chevening Scholarships'
-                ],
-                savedUniversities: [
-                    'Massachusetts Institute of Technology',
-                    'Stanford University'
-                ],
-                createdAt: new Date().toISOString()
-            };
-
-            users.push(demoUser);
-            passwords['demo-user-001'] = 'demo123';
-
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('passwords', JSON.stringify(passwords));
-        }
-    }
 }
 
 // Initialize auth manager when DOM is loaded
@@ -378,9 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Console message
-    console.log('%c🎓 Study Abroad Portal', 'color: #667eea; font-size: 24px; font-weight: bold;');
-    console.log('%c✨ Demo Account Available', 'color: #764ba2; font-size: 16px; font-weight: bold;');
-    console.log('%cEmail: demo@example.com', 'color: #16a34a; font-size: 14px;');
-    console.log('%cPassword: demo123', 'color: #16a34a; font-size: 14px;');
-    console.log('%c\nOr create your own account to get started!', 'color: #64748b; font-size: 14px;');
+    console.log('%c🎓 Study Abroad Portal - Database Connected', 'color: #667eea; font-size: 24px; font-weight: bold;');
+    console.log('%c✨ Create an account to get started!', 'color: #764ba2; font-size: 16px; font-weight: bold;');
+    console.log('%cAll data is now stored in MySQL database', 'color: #16a34a; font-size: 14px;');
 });

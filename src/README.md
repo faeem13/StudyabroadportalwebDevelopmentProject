@@ -169,7 +169,7 @@ You should see output like:
 ║                                                            ║
 ║        🌍 Study Abroad Portal Server (MySQL Enabled)      ║
 ║                                                            ║
-╚════════════════════════════════════════════════════════════╝
+╚════════════��═══════════════════════════════════════════════╝
 
   ✅ Server is running successfully!
   ✅ Database connected successfully!
@@ -461,6 +461,171 @@ study-abroad-portal/
     ├── login-styles.css
     ├── profile-styles.css
     └── (other style files)
+```
+
+---
+
+## 🆘 Getting Help
+
+If you encounter any issues:
+
+1. Check the console for error messages
+2. Verify MySQL server is running
+3. Check database credentials in `.env` file
+4. Review the troubleshooting section above
+5. Check server logs for detailed error information
+
+---
+
+## 🧪 Testing the Database Integration
+
+### Step 1: Verify Server and Database Connection
+
+1. **Start the server:**
+   ```bash
+   npm start
+   ```
+
+2. **Check the console output:**
+   - You should see "✅ Server is running successfully!"
+   - You should see "✅ Database connected successfully!"
+
+3. **Test the health endpoint:**
+   - Open your browser
+   - Go to: `http://localhost:3000/api/health`
+   - You should see: `{"status":"OK","database":"Connected",...}`
+
+### Step 2: Create a New User Account
+
+1. **Go to the login page:**
+   ```
+   http://localhost:3000/login
+   ```
+
+2. **Click "Create Account"**
+
+3. **Fill in the registration form:**
+   - Name: Your Name
+   - Email: your.email@example.com
+   - Password: password123 (minimum 6 characters)
+
+4. **Click "Sign Up"**
+
+5. **Verify in database:**
+   ```sql
+   USE study_abroad_portal;
+   SELECT id, name, email, created_at FROM users;
+   ```
+   You should see your newly created user!
+
+### Step 3: Test Profile Updates
+
+1. **After logging in, you'll be redirected to the profile page**
+
+2. **Click "Edit Profile"**
+
+3. **Update your information:**
+   - Phone: +1234567890
+   - Country: United States
+   - Date of Birth: 2000-01-15
+   - Current Education: Bachelor of Science
+   - Target Degree: Master of Science
+
+4. **Click "Save Changes"**
+
+5. **Verify in database:**
+   ```sql
+   SELECT * FROM users WHERE email = 'your.email@example.com';
+   ```
+   All fields should be updated!
+
+### Step 4: Test Saving Universities
+
+1. **Go to Universities page:**
+   ```
+   http://localhost:3000/universities
+   ```
+
+2. **Click the "Save" button on any university**
+
+3. **You should see:** "University saved successfully!" notification
+
+4. **Verify in database:**
+   ```sql
+   SELECT * FROM saved_universities WHERE user_id = YOUR_USER_ID;
+   ```
+
+5. **Check your profile page:**
+   ```
+   http://localhost:3000/profile
+   ```
+   The saved university should appear under "Saved Universities"
+
+### Step 5: Test Saving Scholarships
+
+1. **Go to Scholarships page:**
+   ```
+   http://localhost:3000/scholarships
+   ```
+
+2. **Click the "Save" button on any scholarship**
+
+3. **You should see:** "Scholarship saved successfully!" notification
+
+4. **Verify in database:**
+   ```sql
+   SELECT * FROM saved_scholarships WHERE user_id = YOUR_USER_ID;
+   ```
+
+5. **Check your profile page - should show saved scholarship!**
+
+### Step 6: Test Logout and Re-login
+
+1. **Click "Logout" button**
+
+2. **Login again with the same credentials**
+
+3. **All your data should still be there!**
+   - Profile information intact
+   - Saved universities visible
+   - Saved scholarships visible
+
+### Common Test Queries
+
+```sql
+-- View all users
+SELECT id, name, email, created_at, last_login FROM users;
+
+-- View user with saved items count
+SELECT 
+    u.id, 
+    u.name, 
+    u.email,
+    COUNT(DISTINCT su.id) as saved_universities_count,
+    COUNT(DISTINCT ss.id) as saved_scholarships_count
+FROM users u
+LEFT JOIN saved_universities su ON u.id = su.user_id
+LEFT JOIN saved_scholarships ss ON u.id = ss.user_id
+GROUP BY u.id;
+
+-- View all saved universities
+SELECT u.name as user_name, su.university_name, su.country, su.saved_at
+FROM saved_universities su
+JOIN users u ON su.user_id = u.id
+ORDER BY su.saved_at DESC;
+
+-- View all saved scholarships
+SELECT u.name as user_name, ss.scholarship_name, ss.amount, ss.deadline
+FROM saved_scholarships ss
+JOIN users u ON ss.user_id = u.id
+ORDER BY ss.saved_at DESC;
+
+-- View user activity
+SELECT u.name, ual.activity_type, ual.activity_description, ual.created_at
+FROM user_activity_log ual
+JOIN users u ON ual.user_id = u.id
+ORDER BY ual.created_at DESC
+LIMIT 20;
 ```
 
 ---
